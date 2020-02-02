@@ -3,9 +3,9 @@ var inputElement = document.querySelector('#app input');
 var buttonElement = document.querySelector('#app button');
 
 var todos = [
-    'Fazer café',
-    'Estudar Javascript',
-    'Acessar a comunidade'
+    'Fazer café ',
+    'Estudar Javascript ',
+    'Acessar a comunidade '
 ];
 
 function renderTodos()
@@ -17,7 +17,20 @@ function renderTodos()
         var todoElement = document.createElement('li');
         var todoText = document.createTextNode(todo);
 
+        var linkElement = document.createElement('a');
+
+        linkElement.setAttribute('href', '#');  
+
+        var pos = todos.indexOf(todo);
+        linkElement.setAttribute('onclick', 'deleteTodo('+ pos +')');
+
+        var linkText = document.createTextNode('Excluir');     
+
+        linkElement.appendChild(linkText);
+
         todoElement.appendChild(todoText);
+        todoElement.appendChild(linkElement);
+
         listElement.appendChild(todoElement);
     }
 }
@@ -26,7 +39,7 @@ renderTodos();
 
 function addTodo()
 {
-    var todoText = inputElement.value;
+    var todoText = inputElement.value+' ';
 
     todos.push(todoText);
     inputElement.value = '';
@@ -34,3 +47,9 @@ function addTodo()
 }
 
 buttonElement.onclick =addTodo;
+
+function deleteTodo(pos)
+{
+    todos.splice(pos, 1);
+    renderTodos();
+}
