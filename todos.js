@@ -31,8 +31,6 @@ function renderTodos()
     }
 }
 
-renderTodos();
-
 function addTodo()
 {
     var todoText = inputElement.value+' ';
@@ -42,8 +40,6 @@ function addTodo()
     renderTodos();
     saveToStorage();
 }
-
-buttonElement.onclick =addTodo;
 
 function deleteTodo(pos)
 {
@@ -56,3 +52,17 @@ function saveToStorage()
 {
     localStorage.setItem('list_todos', JSON.stringify(todos));
 }
+
+function enter()
+{
+
+    if (event.keyCode == 13)
+    {
+        addTodo();
+    }
+
+}
+
+renderTodos();
+buttonElement.onclick =addTodo;
+document.onkeydown=enter;
